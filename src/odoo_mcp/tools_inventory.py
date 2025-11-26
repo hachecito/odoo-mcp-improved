@@ -4,7 +4,7 @@ Implementación de herramientas (tools) para inventario en MCP-Odoo
 
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
-from mcp.server.fastmcp import FastMCP, Context
+from fastmcp import FastMCP, Context
 
 from .models import (
     ProductAvailabilityInput,
