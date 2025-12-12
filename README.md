@@ -70,41 +70,6 @@ This extended version enhances the original MCP-Odoo implementation with advance
 pip install odoo-mcp-improved
 ```
 
-### From Source
-
-```bash
-git clone https://github.com/hachecito/odoo-mcp-improved.git
-cd odoo-mcp-improved
-pip install -e .
-```
-
----
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-```bash
-export ODOO_URL=https://your-odoo-instance.com
-export ODOO_DB=your_database
-export ODOO_USERNAME=your_username
-export ODOO_PASSWORD=your_password
-```
-
-### Configuration File
-
-Create an `odoo_config.json` file in your working directory:
-
-```json
-{
-  "url": "https://your-odoo-instance.com",
-  "db": "your_database",
-  "username": "your_username",
-  "password": "your_password"
-}
-```
-
----
 
 ## 🚀 Usage
 
