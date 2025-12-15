@@ -2,7 +2,7 @@
 Integración de todos los módulos en el servidor MCP principal
 """
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 from .prompts import register_all_prompts
 from .resources import register_all_resources

@@ -1,0 +1,5 @@
+*
+!src/
+!*.py
+!*.md
+!pyproject.toml

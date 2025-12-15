@@ -264,7 +264,7 @@ class OdooClient:
             if order is not None:
                 kwargs["order"] = order
 
-            result = self._execute(model_name, "search_read", domain, kwargs)
+            result = self._execute(model_name, "search_read", domain, **kwargs)
             return result
         except Exception as e:
             print(f"Error in search_read: {str(e)}", file=os.sys.stderr)
@@ -293,7 +293,7 @@ class OdooClient:
             if fields is not None:
                 kwargs["fields"] = fields
 
-            result = self._execute(model_name, "read", ids, kwargs)
+            result = self._execute(model_name, "read", ids, **kwargs)
             return result
         except Exception as e:
             print(f"Error reading records: {str(e)}", file=os.sys.stderr)
