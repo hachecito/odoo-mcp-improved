@@ -64,6 +64,14 @@ This extended version enhances the original MCP-Odoo implementation with advance
 
 ## 📦 Installation
 
+### Using uvx (recommended)
+
+No installation step needed — [uv](https://docs.astral.sh/uv/) downloads and runs the package on demand:
+
+```bash
+uvx odoo-mcp-improved
+```
+
 ### Using pip
 
 ```bash
@@ -76,7 +84,10 @@ pip install odoo-mcp-improved
 ### Running the Server
 
 ```bash
-# Using the module
+# With uvx
+uvx odoo-mcp-improved
+
+# Using the module (after pip install)
 python -m odoo_mcp
 ```
 
@@ -106,8 +117,8 @@ Add the following to your `claude_desktop_config.json`:
 {
   "mcpServers": {
     "odoo": {
-      "command": "python",
-      "args": ["-m", "odoo_mcp"],
+      "command": "uvx",
+      "args": ["odoo-mcp-improved"],
       "env": {
         "ODOO_URL": "https://your-odoo-instance.com",
         "ODOO_DB": "your_database",
@@ -118,6 +129,8 @@ Add the following to your `claude_desktop_config.json`:
   }
 }
 ```
+
+Without `uv`, use `pip install odoo-mcp-improved` and run it with `"command": "python", "args": ["-m", "odoo_mcp"]` instead.
 
 ---
 
