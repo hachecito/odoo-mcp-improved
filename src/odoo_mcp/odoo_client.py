@@ -196,7 +196,7 @@ class OdooClient:
                 "ir.model",
                 "search_read",
                 [("model", "=", model_name)],
-                {"fields": ["name", "model"]},
+                fields=["name", "model"],
             )
 
             if not result:
@@ -229,6 +229,26 @@ class OdooClient:
         except Exception as e:
             print(f"Error retrieving fields: {str(e)}", file=os.sys.stderr)
             return {"error": str(e)}
+
+    def pick_available_field(self, model_name, candidates):
+        """
+        Return the first field name in `candidates` that actually exists on
+        `model_name`. Some fields were renamed across Odoo versions (e.g.
+        account.account.account_type vs. the older user_type_id relation),
+        so callers should use this instead of hardcoding a single field name.
+
+        Args:
+            model_name: Name of the model (e.g., 'account.account')
+            candidates: Field names to try, newest/preferred first
+
+        Returns:
+            The first matching field name, or None if none of them exist
+        """
+        available = self.get_model_fields(model_name)
+        for field in candidates:
+            if field in available:
+                return field
+        return None
 
     def search_read(
         self, model_name, domain, fields=None, offset=None, limit=None, order=None

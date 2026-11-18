@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "odoo-mcp-improved"
-version = "1.0.6"
+version = "1.0.7"
 description = "MCP Server for Odoo Integration"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,7 +20,6 @@ authors = [
 ]
 dependencies = [
     "mcp>=1.6.0,<2.0",
-    "fastmcp>=2.0,<3",
     "requests>=2.31.0",
 ]
 
@@ -36,6 +35,7 @@ dev = [
     "ruff",
     "build",
     "twine",
+    "pytest",
 ]
 
 [project.scripts]

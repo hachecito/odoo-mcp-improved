@@ -4,12 +4,13 @@ Implementación de herramientas (tools) para ventas en MCP-Odoo
 
 from typing import Dict, List, Any, Optional
 from datetime import datetime, timedelta
-from fastmcp import FastMCP, Context
+from mcp.server.fastmcp import FastMCP, Context
 
 from .models import (
     SalesOrderFilter,
     SalesOrderCreate,
-    SalesPerformanceInput
+    SalesPerformanceInput,
+    CustomerInsightsInput
 )
 
 def register_sales_tools(mcp: FastMCP) -> None:
@@ -334,6 +335,91 @@ def register_sales_tools(mcp: FastMCP) -> None:
                 result["grouped_data"] = grouped_data
             
             return {"success": True, "result": result}
-            
+
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+
+    @mcp.tool(description="Get detailed insights about a specific customer")
+    def get_customer_insights(
+        ctx: Context,
+        params: CustomerInsightsInput
+    ) -> Dict[str, Any]:
+        """
+        Order history summary and top products for one customer.
+
+        Args:
+            params: partner_id and an optional date range
+
+        Returns:
+            Dict with customer info, order stats and top products by spend
+        """
+        odoo = ctx.request_context.lifespan_context.odoo
+
+        try:
+            partner = odoo.read_records(
+                "res.partner", [params.partner_id], fields=["name", "email", "phone"]
+            )
+            if not partner:
+                return {"success": False, "error": f"Customer not found: {params.partner_id}"}
+
+            domain = [
+                ("partner_id", "=", params.partner_id),
+                ("state", "in", ["sale", "done"]),
+            ]
+            if params.date_from:
+                domain.append(("date_order", ">=", params.date_from))
+            if params.date_to:
+                domain.append(("date_order", "<=", params.date_to))
+
+            orders = odoo.search_read(
+                "sale.order",
+                domain,
+                fields=["name", "date_order", "amount_total"],
+                order="date_order asc",
+            )
+
+            order_count = len(orders)
+            total_spent = sum(order["amount_total"] for order in orders)
+            average_order_value = total_spent / order_count if order_count else 0
+
+            top_products = []
+            order_ids = [order["id"] for order in orders]
+            if order_ids:
+                order_lines = odoo.search_read(
+                    "sale.order.line",
+                    [("order_id", "in", order_ids)],
+                    fields=["product_id", "product_uom_qty", "price_subtotal"],
+                )
+                product_data: Dict[int, Dict[str, Any]] = {}
+                for line in order_lines:
+                    if not line["product_id"]:
+                        continue
+                    product_id, product_name = line["product_id"]
+                    entry = product_data.setdefault(
+                        product_id, {"name": product_name, "quantity": 0, "amount": 0}
+                    )
+                    entry["quantity"] += line["product_uom_qty"]
+                    entry["amount"] += line["price_subtotal"]
+
+                top_products = [
+                    {"id": product_id, **data}
+                    for product_id, data in sorted(
+                        product_data.items(), key=lambda x: x[1]["amount"], reverse=True
+                    )[:5]
+                ]
+
+            return {
+                "success": True,
+                "result": {
+                    "customer": partner[0],
+                    "order_count": order_count,
+                    "total_spent": round(total_spent, 2),
+                    "average_order_value": round(average_order_value, 2),
+                    "first_order_date": orders[0]["date_order"] if orders else None,
+                    "last_order_date": orders[-1]["date_order"] if orders else None,
+                    "top_products": top_products,
+                },
+            }
+
         except Exception as e:
             return {"success": False, "error": str(e)}

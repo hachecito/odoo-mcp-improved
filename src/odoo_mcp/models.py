@@ -34,6 +34,12 @@ class SalesPerformanceInput(BaseModel):
     date_to: str = Field(description="Fecha final (YYYY-MM-DD)")
     group_by: Optional[str] = Field(None, description="Agrupar por ('product', 'customer', 'salesperson')")
 
+class CustomerInsightsInput(BaseModel):
+    """Parameters to get insights about a customer"""
+    partner_id: int = Field(description="Customer ID (res.partner)")
+    date_from: Optional[str] = Field(None, description="Start date (YYYY-MM-DD, optional)")
+    date_to: Optional[str] = Field(None, description="End date (YYYY-MM-DD, optional)")
+
 # Modelos para Compras
 class PurchaseOrderLineCreate(BaseModel):
     """Línea de orden de compra para creación"""

@@ -7,7 +7,7 @@
 
 ![Odoo MCP Improved Logo](https://img.shields.io/badge/Odoo%20MCP-Improved-brightgreen?style=for-the-badge&logo=odoo)
 
-[![PyPI version](https://img.shields.io/badge/pypi-v1.0.0-blue.svg)](https://pypi.org/project/odoo-mcp-improved/)
+[![PyPI version](https://img.shields.io/pypi/v/odoo-mcp-improved.svg)](https://pypi.org/project/odoo-mcp-improved/)
 [![Python Versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://pypi.org/project/odoo-mcp-improved/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -173,6 +173,15 @@ Without `uv`, use `pip install odoo-mcp-improved` and run it with `"command": "p
 
 ## 🔗 Resources Reference
 
+### Core Resources
+
+| URI | Description |
+|-----|-------------|
+| `odoo://models` | List all available models in the Odoo system |
+| `odoo://model/{model_name}` | Get detailed information about a specific model, including its fields |
+| `odoo://record/{model_name}/{record_id}` | Get a specific record by ID |
+| `odoo://search/{model_name}/{domain}` | Search for records matching a JSON domain |
+
 ### Sales Resources
 
 | URI | Description |
@@ -204,7 +213,7 @@ Without `uv`, use `pip install odoo-mcp-improved` and run it with `"command": "p
 |-----|-------------|
 | `odoo://accounting/accounts` | List accounting accounts |
 | `odoo://accounting/journal_entries` | List journal entries |
-| `odoo://accounting/reports/{report_type}` | Get financial reports |
+| `odoo://accounting/reports/{report_type}` | Get financial reports (currently supports `trial_balance`) |
 
 ---
 

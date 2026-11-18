@@ -2,7 +2,7 @@
 Implementación de prompts para MCP-Odoo
 """
 
-from fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP
 
 def register_sales_prompts(mcp: FastMCP) -> None:
     """Registra prompts relacionados con ventas"""
