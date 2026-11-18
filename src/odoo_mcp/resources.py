@@ -2,7 +2,7 @@
 Integración de recursos para MCP-Odoo
 """
 
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
 
 def register_sales_resources(mcp: FastMCP) -> None:
     """Registra recursos relacionados con ventas"""
