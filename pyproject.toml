@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "odoo-mcp-improved"
-version = "1.0.2"
+version = "1.0.6"
 description = "MCP Server for Odoo Integration"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,9 +20,9 @@ authors = [
     {name = "Yhasmani Valdes", email = "yhasmanivm@gmail.com"}
 ]
 dependencies = [
-    "mcp>=0.1.1",
+    "mcp>=1.6.0,<2.0",
+    "fastmcp>=2.0,<3",
     "requests>=2.31.0",
-    "pypi-xmlrpc==2020.12.3",
 ]
 
 [project.urls]
