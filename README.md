@@ -7,9 +7,12 @@
 
 ![Odoo MCP Improved Logo](https://img.shields.io/badge/Odoo%20MCP-Improved-brightgreen?style=for-the-badge&logo=odoo)
 
+[![Odoo Mcp Improved MCP server](https://mcprush.com/badge/odoo-mcp-improved/card.svg)](https://mcprush.com/to/odoo-mcp-improved?ref=badge)
+
 [![PyPI version](https://img.shields.io/pypi/v/odoo-mcp-improved.svg)](https://pypi.org/project/odoo-mcp-improved/)
 [![Python Versions](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](https://pypi.org/project/odoo-mcp-improved/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Odoo Mcp Improved on mcprush](https://mcprush.com/badge/odoo-mcp-improved/score.svg)](https://mcprush.com/to/odoo-mcp-improved?ref=badge)
 
 **Enhanced Model Context Protocol (MCP) server for Odoo ERP with advanced tools for sales, purchases, inventory and accounting**
 
